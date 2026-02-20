@@ -1,0 +1,260 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: salmon;
+    z-index: 100;
+}
+
+header img {
+    margin-left: 20px;
+}
+
+header, h1 {
+    color: rgb(161, 21, 21);
+}
+
+
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+    font-weight: 600;
+}
+
+.toggle-nav {
+    display: none; /* Hidden by default */
+    cursor: pointer;
+}
+
+
+
+/*container de productos*/
+
+
+.titulo {
+  padding-top: 30px;
+  text-align: center;
+  color: brown;
+}
+.titulo h2 {
+  margin-top: 20px;
+}
+.slideshow-container {
+  width: 100%;
+  overflow: hidden; /* Hide the duplicated images until animated */
+  white-space: nowrap; /* Keep images in a single line */
+  box-sizing: border-box;
+}
+
+.gallery-wrapper {
+  padding-top: 100px;
+  display: inline-block;
+  /* Total width must be 200% of the container width to account for duplicates */
+  width: 200%; 
+  animation: autoscroll 60s linear infinite; /* Adjust duration as needed */
+}
+
+.slideshow-container:hover .gallery-wrapper {
+  animation-play-state: paused; /* Pause animation on hover */
+}
+
+.gallery-wrapper img {
+  display: inline-block;
+  height: 200px; /* Adjust image size as needed */
+  padding: 0 10px; /* Add some spacing */
+}
+
+
+
+@keyframes autoscroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Moves exactly half the width to seamlessly transition to the duplicated set */
+    transform: translateX(-50%); 
+  }
+}
+
+h2 {
+  color: brown;
+  text-align: center;
+  padding-top: 30px;
+}
+
+p {
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+/* GALERIA STYLE START */
+
+.gallery {
+  position: relative;
+  text-align: center;
+  padding-top: 20px;
+  margin: 20px;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  white-space: nowrap; /* Prevents images from wrapping */
+}
+
+.gallery-item {
+    display: inline-flex; /* Aligns images in a row */
+    gap: 10px; /* Space between images */
+}
+
+.gallery-item img {
+    width: 200px; /* Adjust image size as needed */
+    height: 200px; /* Adjust image size as needed */
+    object-fit: cover; /* Ensures images cover the area without distortion */
+    border-radius: 10px; /* Optional: adds rounded corners to images */
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.text  {
+  position: absolute;
+  bottom: 10px;
+  font-size: large;
+  color: blue;
+  font-weight: bolder;
+}
+
+
+
+
+/* GALERIA STYLE END */
+
+
+/*area del pan*/
+ h2 {
+  color: brown;
+  text-align: center;
+}
+
+p {
+  font-weight: 500;
+}
+
+div.scroll-container {
+  width: 100%;
+  overflow: hidden; /* Hide the duplicated images until animated */
+  white-space: nowrap; /* Keep images in a single line */
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+div.scroll-container img {
+  display: inline-block;
+  width: 200px;
+  height: 200px; /* Adjust image size as needed */
+  padding: 0 10px; /* Add some spacing */
+    object-fit: cover; /* Ensures images cover the area without distortion */
+    border-radius: 10px; /* Optional: adds rounded corners to images */
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.pan-container {
+   animation: autoscroll 60s linear infinite; /* Adjust duration as needed */
+   animation-direction: reverse;
+}
+
+
+
+.scroll-container:hover .pan-container {
+  animation-play-state: paused; /* Pause animation on hover */
+}
+
+
+ 
+
+/* foooter section*/
+
+
+.site-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: auto; /* Pushes the footer to the bottom */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px; /* Ensures sections don't get too small */
+    margin: 15px;
+}
+
+.footer-section h3 {
+    color: #00bcd4; /* A contrasting color for headings */
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #555;
+    margin-top: 20px;
+}
+
+
+/*responsive header*/
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .nav-links {
+        display: none; /* Hide links by default */
+        flex-direction: column; /* Stack links vertically */
+        position: absolute;
+        top: 70px; /* Adjust based on header height */
+        right: 0;
+        background-color: salmon; /* Background color for dropdown */
+        width: 100%; /* Full width */
+    }
+
+    .nav-links.active {
+        display: flex; /* Show links when active */
+    }
+
+    .toggle-nav {
+        display: block; /* Show burger icon */
+        font-size: 30px;
+    }
+
+    header img {
+        margin-right: 10px;
+    }
+}
+
