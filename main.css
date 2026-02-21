@@ -5,18 +5,22 @@
 }
 
 header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: salmon;
-    z-index: 100;
+  max-width: 1400px;
+  max-height: 400px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: salmon;
+  z-index: 100;
 }
 
 header img {
     margin-left: 20px;
+    width: 150px;
+    height: 100px;
 }
 
 header, h1 {
@@ -65,7 +69,7 @@ header, h1 {
   display: inline-block;
   /* Total width must be 200% of the container width to account for duplicates */
   width: 200%; 
-  animation: autoscroll 60s linear infinite; /* Adjust duration as needed */
+  animation: autoscroll 40s linear infinite; /* Adjust duration as needed */
 }
 
 .slideshow-container:hover .gallery-wrapper {
@@ -174,7 +178,7 @@ div.scroll-container img {
 }
 
 .pan-container {
-   animation: autoscroll 60s linear infinite; /* Adjust duration as needed */
+   animation: autoscroll 30s linear infinite; /* Adjust duration as needed */
    animation-direction: reverse;
 }
 
