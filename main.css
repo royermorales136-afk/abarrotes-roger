@@ -1,0 +1,390 @@
+/* ===== VARIABLES ===== */
+:root {
+    --primary-color: #333;       /* Color oscuro para footer y headers */
+    --accent-color: salmon;       /* Color principal del header */
+    --accent-light: #ffd7b0;      /* Un tono más claro */
+    --text-dark: #2d1e12;
+    --text-light: #fff;
+    --heading-color: brown;
+    --link-hover: #00bcd4;        /* Color de enlaces en footer */
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --max-width: 1200px;
+    --border-radius: 10px;
+    --transition: 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== RESET Y BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* ===== HEADER Y NAVEGACIÓN ===== */
+header {
+    background-color: #c46b4d;
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header img {
+    width: 150px;
+    height: auto;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+header h2 {
+    color: var(--heading-color);
+    font-size: 1.5rem;
+    margin: 0;
+    background: none;
+    padding: 0;
+}
+
+.toggle-nav {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text-dark);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    padding: 0.5rem;
+    transition: color var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--link-hover);
+}
+
+/* ===== TÍTULOS GENERALES ===== */
+h2 {
+    color: var(--heading-color);
+    text-align: center;
+    margin: 2rem 0 1rem;
+    font-size: 2rem;
+}
+
+p {
+    margin: 0 0 1rem 0;
+    font-weight: 500;
+}
+
+/* ===== SECCIÓN PRODUCTOS (CARRUSEL) ===== */
+.slideshow-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 2rem 0;
+}
+
+.gallery-wrapper {
+    display: inline-block;
+    width: 200%; /* Duplica el ancho para el efecto infinito */
+    animation: autoscroll 40s linear infinite;
+}
+
+.gallery-wrapper img {
+    display: inline-block;
+    height: 200px;
+    width: auto;
+    margin: 0 0.5rem;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.slideshow-container:hover .gallery-wrapper {
+    animation-play-state: paused;
+}
+
+@keyframes autoscroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ===== SECCIÓN PAN (CARRUSEL REVERSO) ===== */
+.scroll-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 2rem 0;
+}
+
+.pan-container {
+    display: inline-block;
+    animation: autoscroll 30s linear infinite reverse;
+}
+
+.pan-container img {
+    display: inline-block;
+    height: 200px;
+    width: auto;
+    margin: 0 0.5rem;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.scroll-container:hover .pan-container {
+    animation-play-state: paused;
+}
+
+/* ===== GALERÍA PRINCIPAL (con lightbox) ===== */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem auto;
+    max-width: var(--max-width);
+    padding: 0 1rem;
+}
+
+.gallery-item {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition);
+    cursor: pointer;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Texto superpuesto en galería (mejorado) */
+.gallery-item .text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    transform: translateY(100%);
+    transition: transform var(--transition);
+}
+
+.gallery-item:hover .text {
+    transform: translateY(0);
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background-color: #5e3a2b;
+    color: var(--text-light);
+    padding: 2rem 0 1rem;
+    margin-top: 3rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-section h3 {
+    color: var(--link-hover);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-section p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.footer-section a {
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+/* Mapa en footer */
+.mapa-wrapper {
+    margin-top: 1rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.mapa-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 200px;
+    border: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 1.5rem 1rem 0;
+    border-top: 1px solid #555;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.footer-bottom a {
+    color: var(--link-hover);
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* ===== BOTÓN FLOTANTE WHATSAPP ===== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        padding: 0.5rem;
+    }
+
+    header h2 {
+        font-size: 1.2rem;
+        order: 1;
+    }
+
+    header img {
+        width: 100px;
+        order: 0;
+    }
+
+    .toggle-nav {
+        display: block;
+        order: 2;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--accent-color);
+        padding: 1rem 0;
+        order: 3;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+
+    .gallery-item {
+        width: 150px;
+        height: 150px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-section h3 {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-item {
+        width: 130px;
+        height: 130px;
+    }
+
+    .gallery-wrapper img,
+    .pan-container img {
+        height: 150px;
+    }
+}
+
+/* ===== UTILIDADES ===== */
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
