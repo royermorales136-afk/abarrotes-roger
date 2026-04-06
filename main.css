@@ -1,16 +1,18 @@
 /* ===== VARIABLES ===== */
 :root {
-    --primary-color: #333;       /* Color oscuro para footer y headers */
-    --accent-color: salmon;       /* Color principal del header */
-    --accent-light: #ffd7b0;      /* Un tono más claro */
+    --primary-color: #333;
+    --accent-color: salmon;
+    --accent-light: #ffd7b0;
     --text-dark: #2d1e12;
     --text-light: #fff;
     --heading-color: brown;
-    --link-hover: #00bcd4;        /* Color de enlaces en footer */
+    --link-hover: #00bcd4;
     --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --max-width: 1200px;
     --border-radius: 10px;
     --transition: 0.3s ease;
+    --header-bg: #c46b4d;
+    --footer-bg: #5e3a2b;
 }
 
 html {
@@ -28,11 +30,13 @@ body {
     font-family: var(--font-main);
     line-height: 1.6;
     color: var(--text-dark);
+    overflow-x: hidden; /* Evita desborde horizontal */
+    padding-bottom: 80px; /* Espacio para el botón flotante */
 }
 
 /* ===== HEADER Y NAVEGACIÓN ===== */
 header {
-    background-color: #c46b4d;
+    background-color: var(--header-bg);
     padding: 0 1rem;
     position: sticky;
     top: 0;
@@ -87,6 +91,14 @@ header h2 {
 }
 
 /* ===== TÍTULOS GENERALES ===== */
+h1 {
+    color: var(--heading-color);
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.8rem;
+    padding: 0 1rem;
+}
+
 h2 {
     color: var(--heading-color);
     text-align: center;
@@ -100,66 +112,53 @@ p {
 }
 
 /* ===== SECCIÓN PRODUCTOS (CARRUSEL) ===== */
-.slideshow-container {
+.slideshow-container,
+.scroll-container {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
     white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
     margin: 2rem 0;
 }
 
-.gallery-wrapper {
+.gallery-wrapper,
+.pan-container {
     display: inline-block;
-    width: 200%; /* Duplica el ancho para el efecto infinito */
-    animation: autoscroll 40s linear infinite;
+    white-space: nowrap;
+    will-change: transform; /* Aceleración por hardware */
 }
 
-.gallery-wrapper img {
+.gallery-wrapper img,
+.pan-container img {
     display: inline-block;
+    width: 200px;
     height: 200px;
-    width: auto;
+    object-fit: cover;
     margin: 0 0.5rem;
     border-radius: var(--border-radius);
-    object-fit: cover;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.slideshow-container:hover .gallery-wrapper {
+/* Animación solo si se desea (opcional) - por defecto la desactivamos para mejor control táctil */
+/* Si quieres mantener la animación automática, descomenta estas líneas */
+
+.gallery-wrapper {
+    animation: autoscroll 40s linear infinite;
+}
+.pan-container {
+    animation: autoscroll 30s linear infinite reverse;
+}
+.slideshow-container:hover .gallery-wrapper,
+.scroll-container:hover .pan-container {
     animation-play-state: paused;
 }
-
 @keyframes autoscroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* ===== SECCIÓN PAN (CARRUSEL REVERSO) ===== */
-.scroll-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 2rem 0;
-}
 
-.pan-container {
-    display: inline-block;
-    animation: autoscroll 30s linear infinite reverse;
-}
-
-.pan-container img {
-    display: inline-block;
-    height: 200px;
-    width: auto;
-    margin: 0 0.5rem;
-    border-radius: var(--border-radius);
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.scroll-container:hover .pan-container {
-    animation-play-state: paused;
-}
-
-/* ===== GALERÍA PRINCIPAL (con lightbox) ===== */
+/* ===== GALERÍA PRINCIPAL ===== */
 .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -191,18 +190,19 @@ p {
     transform: scale(1.05);
 }
 
-/* Texto superpuesto en galería (mejorado) */
+/* Texto superpuesto - mejor contraste */
 .gallery-item .text {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.85);
     color: white;
     text-align: center;
     padding: 0.5rem;
     font-size: 1rem;
     font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     transform: translateY(100%);
     transition: transform var(--transition);
 }
@@ -211,9 +211,19 @@ p {
     transform: translateY(0);
 }
 
+/* En móviles sin hover, el texto siempre visible */
+@media (hover: none) and (max-width: 768px) {
+    .gallery-item .text {
+        transform: translateY(0);
+        background: rgba(0,0,0,0.8);
+        font-size: 0.8rem;
+        padding: 0.3rem;
+    }
+}
+
 /* ===== FOOTER ===== */
 .site-footer {
-    background-color: #5e3a2b;
+    background-color: var(--footer-bg);
     color: var(--text-light);
     padding: 2rem 0 1rem;
     margin-top: 3rem;
@@ -252,7 +262,6 @@ p {
     text-decoration: underline;
 }
 
-/* Mapa en footer */
 .mapa-wrapper {
     margin-top: 1rem;
     border-radius: var(--border-radius);
@@ -307,6 +316,23 @@ p {
 .whatsapp-float:hover {
     background-color: #128C7E;
     transform: scale(1.1);
+}
+
+/* ===== ACCESIBILIDAD ===== */
+:focus-visible {
+    outline: 2px solid var(--link-hover);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /* ===== MEDIA QUERIES ===== */
@@ -372,6 +398,7 @@ p {
 
     .gallery-wrapper img,
     .pan-container img {
+        width: 150px;
         height: 150px;
     }
 }
