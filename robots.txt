@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://royermorales136-afk.github.io/abarrotes-roger/sitemap.xml
